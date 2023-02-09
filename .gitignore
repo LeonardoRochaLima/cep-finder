@@ -1,0 +1,55 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Caches
+*.egg-info/
+*.eggs/
+dist/
+build/
+*.egg
+
+# Django settings/config
+local_settings.py
+db.sqlite3
+
+# Django static files
+static/
+
+# Media files
+media/
+
+# Virtual environment
+.env/
+.venv/
+env/
+venv/
+
+# PyTest reports
+htmlcov/
+.coverage
+
+# PyTest cache
+.pytest_cache/
+
+# Sphinx documentation
+docs/_build/
+
+# Django Rest Framework settings
+.drf-settings.yaml
+
+# Local settings
+.local/
+
+# .idea directory
+.idea/
+
+# .DS_Store files
+.DS_Store
+
+# File settings
+*.log
+*.pot
+*.pyc
+*.sqlite3
