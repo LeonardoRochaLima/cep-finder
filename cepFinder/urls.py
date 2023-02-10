@@ -1,4 +1,4 @@
-"""web URL Configuration
+"""cepFinder URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
@@ -16,18 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from rest_framework import routers
-from web.cep.api import viewsets as cepviewsets
-from web.cep.views import get_cep_data, GetCepData
-
-route = routers.DefaultRouter()
-
-route.register(r'cep', cepviewsets.CepViewSets, basename="CEP")
-route.register(r'cepslojacorr', cepviewsets.CepsLojaCorrViewSets, basename="CEPsLojaCorr")
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(route.urls)),
-    path('cep/<str:cep>', get_cep_data, name='get_cep_data'),
-    path('cep/<cep>', GetCepData.as_view(), name='get_cep_data'),
+    path('api/', include('api.urls')),
 ]

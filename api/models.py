@@ -1,6 +1,7 @@
 from django.db import models
 
 # Create your models here.
+
 class Cep(models.Model):
     cep = models.CharField(max_length=9, unique=True)
     logradouro = models.CharField(max_length=100)
@@ -13,17 +14,5 @@ class Cep(models.Model):
     ddd = models.CharField(max_length=3, blank=True, null=True)
     siafi = models.CharField(max_length=10, blank=True, null=True)
 
-    def get_cep_data(cep):
-        cep_object = Cep.objects.get(cep=cep)
-        return cep_object
-    
-    class Meta:
-        app_label = 'web'
-
-class CepsLojaCorr(models.Model):
-    nome = models.CharField(max_length=255)
-    sigla = models.CharField(max_length=2)
-    atua = models.BooleanField(default=False)
-
-    class Meta:
-        app_label = 'web'
+    def __str__(self):
+        return self.cep
