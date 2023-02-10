@@ -9,3 +9,4 @@ class CepList(generics.ListCreateAPIView):
 class CepDetails(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CepSerializer
     queryset = Cep.objects.all()
+    lookup_field = 'cep'

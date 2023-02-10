@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 class Cep(models.Model):
-    cep = models.CharField(max_length=9, unique=True)
+    cep = models.CharField(max_length=9, unique=True, primary_key=True)
     logradouro = models.CharField(max_length=100)
     complemento = models.CharField(max_length=100, blank=True, null=True)
     bairro = models.CharField(max_length=100)
