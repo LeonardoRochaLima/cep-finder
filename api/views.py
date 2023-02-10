@@ -11,6 +11,8 @@ class CepList(generics.ListCreateAPIView):
 
 class CreateCEPView(APIView):
     def get(self, request, cep):
+        # Remove o hífen do CEP, caso exista - Evitando dados duplicados no banco
+        cep = cep.replace("-", "")
         # Faz a requisição à API Viacep
         response = requests.get(f'https://viacep.com.br/ws/{cep}/json/')
         if response.status_code == 200:
