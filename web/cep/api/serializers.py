@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from web.app import models
+from web.cep import models
 
 class CepSerializers(serializers.ModelSerializer):
     class Meta:
