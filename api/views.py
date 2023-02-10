@@ -52,7 +52,7 @@ class CreateCEPView(APIView):
             serializer = CepSerializer(cep_obj)
             return Response(serializer.data)
         else:
-            return Response({"error": "CEP não encontrado"}, status=requests.status.HTTP_400_BAD_REQUEST)
+            return Response({"error": "CEP não encontrado"}, status=400)
 
 class CepDetails(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CepSerializer
