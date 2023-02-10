@@ -17,7 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 
 from rest_framework import routers
-from web.cep.api import viewsets as cepviewsets 
+from web.cep.api import viewsets as cepviewsets
+from web.cep.views import get_cep_data
 
 route = routers.DefaultRouter()
 
@@ -26,5 +27,6 @@ route.register(r'cepslojacorr', cepviewsets.CepsLojaCorrViewSets, basename="CEPs
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(route.urls))
+    path('', include(route.urls)),
+    path('cep/<str:cep>', get_cep_data, name='get_cep_data'),
 ]
