@@ -22,6 +22,7 @@ from web.cep.api import viewsets as cepviewsets
 route = routers.DefaultRouter()
 
 route.register(r'cep', cepviewsets.CepViewSets, basename="CEP")
+route.register(r'cepslojacorr', cepviewsets.CepsLojaCorrViewSets, basename="CEPsLojaCorr")
 
 urlpatterns = [
     path('admin/', admin.site.urls),

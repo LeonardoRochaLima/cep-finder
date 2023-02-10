@@ -10,3 +10,11 @@ class Cep(models.Model):
     
     class Meta:
         app_label = 'web'
+
+class CepsLojaCorr(models.Model):
+    nome = models.CharField(max_length=255)
+    sigla = models.CharField(max_length=2)
+    atua = models.BooleanField(default=False)
+
+    class Meta:
+        app_label = 'web'
