@@ -88,32 +88,40 @@ class CepsLojaCorrList(generics.ListCreateAPIView):
     queryset = CepsLojaCorr.objects.all()
 
 class CreateCEPsLojaCorrView(APIView):
-    def get(self, request, cep):
+    def get(self, request, ceplojacorr):
         # Remove o hífen do CEP, caso exista - Evitando dados duplicados no banco
-        cep = cep.replace("-", "")
+        ceplojacorr = ceplojacorr.replace("-", "")
+
         # Faz a requisição à API Viacep
-        response = requests.get(f'https://viacep.com.br/ws/{cep}/json/')
+        response = requests.get(f'https://viacep.com.br/ws/{ceplojacorr}/json/')
         if response.status_code == 200:
             data = response.json()
 
-            # Verifica se o CEP já está cadastrado
-            cep_obj = Cep.objects.filter(cep=cep).first()
+            # Verifica se o cep a ser cadastrado existe na tabela cep
+            cep_obj = Cep.objects.filter(cep=ceplojacorr).first()
+
             if cep_obj:
-                # Caso já exista, atualiza os dados
-                cep_obj.logradouro = data.get("logradouro")
-                cep_obj.complemento = data.get("complemento")
-                cep_obj.bairro = data.get("bairro")
-                cep_obj.localidade = data.get("localidade")
-                cep_obj.uf = data.get("uf")
-                cep_obj.ibge = data.get("ibge")
-                cep_obj.gia = data.get("gia")
-                cep_obj.ddd = data.get("ddd")
-                cep_obj.siafi = data.get("siafi")
+                cep_obj.lojacorr = True
                 cep_obj.save()
+
+            # Verifica se o CEP já está cadastrado
+            cep_obj_lojacorr = CepsLojaCorr.objects.filter(cep=ceplojacorr).first()
+            if cep_obj_lojacorr:
+                # Caso já exista, atualiza os dados
+                cep_obj_lojacorr.logradouro = data.get("logradouro")
+                cep_obj_lojacorr.complemento = data.get("complemento")
+                cep_obj_lojacorr.bairro = data.get("bairro")
+                cep_obj_lojacorr.localidade = data.get("localidade")
+                cep_obj_lojacorr.uf = data.get("uf")
+                cep_obj_lojacorr.ibge = data.get("ibge")
+                cep_obj_lojacorr.gia = data.get("gia")
+                cep_obj_lojacorr.ddd = data.get("ddd")
+                cep_obj_lojacorr.siafi = data.get("siafi")
+                cep_obj_lojacorr.save()
             else:
                 # Caso não exista, cria um novo registro
                 CepsLojaCorr.objects.create(
-                    cep=cep,
+                    cep=ceplojacorr,
                     logradouro=data.get("logradouro"),
                     complemento=data.get("complemento"),
                     bairro=data.get("bairro"),
@@ -125,9 +133,9 @@ class CreateCEPsLojaCorrView(APIView):
                     siafi=data.get("siafi"),
                 )
 
-            # Retorna o objeto do CEP
-            cep_obj = CepsLojaCorr.objects.get(cep=cep)
-            serializer = CepsLojaCorrSerializer(cep_obj)
+            # Retorna o objeto do CEPLojaCorr
+            cep_obj_lojacorr = CepsLojaCorr.objects.get(cep=ceplojacorr)
+            serializer = CepsLojaCorrSerializer(cep_obj_lojacorr)
             return Response(serializer.data)
         else:
             return Response({"error": "CEP não encontrado"}, status=400)
