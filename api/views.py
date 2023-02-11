@@ -21,8 +21,12 @@ class CreateCEPView(APIView):
             # Verifica se o CEP já está cadastrado
             cep_obj = Cep.objects.filter(cep=cep).first()
 
+            # Verificando se é um estado em que a lojacorr atua
+            estado = Estado.objects.filter(uf=data.get("uf")).first()
+
             if cep_obj:
-                
+                if estado:
+                    cep_obj.lojacorr = True
                 # Caso já exista, atualiza os dados
                 cep_obj.logradouro = data.get("logradouro")
                 cep_obj.complemento = data.get("complemento")
@@ -36,7 +40,10 @@ class CreateCEPView(APIView):
                 cep_obj.save()
             else:
                 # Caso não exista, cria um novo registro
-                Cep.objects.create(
+
+                # Adicionando a flag caso seja um estado que a lojacorr atua
+                if estado:
+                    Cep.objects.create(
                     cep=cep,
                     logradouro=data.get("logradouro"),
                     complemento=data.get("complemento"),
@@ -47,7 +54,21 @@ class CreateCEPView(APIView):
                     gia=data.get("gia"),
                     ddd=data.get("ddd"),
                     siafi=data.get("siafi"),
-                )
+                    lojacorr=True
+                    )
+                else:
+                    Cep.objects.create(
+                        cep=cep,
+                        logradouro=data.get("logradouro"),
+                        complemento=data.get("complemento"),
+                        bairro=data.get("bairro"),
+                        localidade=data.get("localidade"),
+                        uf=data.get("uf"),
+                        ibge=data.get("ibge"),
+                        gia=data.get("gia"),
+                        ddd=data.get("ddd"),
+                        siafi=data.get("siafi"),
+                    )
 
             # Retorna o objeto do CEP
             cep_obj = Cep.objects.get(cep=cep)
