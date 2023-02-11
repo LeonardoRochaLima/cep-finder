@@ -88,9 +88,9 @@ class CepsLojaCorrList(generics.ListCreateAPIView):
     queryset = CepsLojaCorr.objects.all()
 
 class CreateCEPsLojaCorrView(APIView):
-    def get(self, request, ceplojacorr):
+    def get(self, request, ceplojacor):
         # Remove o hífen do CEP, caso exista - Evitando dados duplicados no banco
-        ceplojacorr = ceplojacorr.replace("-", "")
+        ceplojacorr = ceplojacor.replace("-", "")
 
         # Faz a requisição à API Viacep
         response = requests.get(f'https://viacep.com.br/ws/{ceplojacorr}/json/')

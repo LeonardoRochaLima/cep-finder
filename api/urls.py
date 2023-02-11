@@ -7,6 +7,6 @@ urlpatterns = [
     path('cep/create/<str:cep>', CreateCEPView.as_view(), name='create'),
 
     path('cepslojacorr/', CepsLojaCorrList.as_view()),
-    path('cepslojacorr/<str:cep>', CepsLojaCorrDetails.as_view()),
-    path('cepslojacorr/create/<str:cep>', CreateCEPsLojaCorrView.as_view(), name='create'),
+    path('cepslojacorr/<str:ceplojacor>', CepsLojaCorrDetails.as_view()),
+    path('cepslojacorr/create/<str:ceplojacor>', CreateCEPsLojaCorrView.as_view(), name='create'),
 ]
