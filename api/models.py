@@ -16,8 +16,8 @@ class Cep(models.Model):
     ddd = models.CharField(max_length=3, blank=True, null=True)
     siafi = models.CharField(max_length=10, blank=True, null=True)
     lojacorr = models.BooleanField(default=False)
-    created_at = models.DateTimeField(default=timezone.now())
-    updated_at = models.DateTimeField(default=timezone.now())
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(default=timezone.now)
 
     def save(self, *args, **kwargs):
         self.updated_at = timezone.now()
@@ -29,8 +29,8 @@ class Cep(models.Model):
 class Estado(models.Model):
     uf = models.CharField(max_length=9, unique=True, primary_key=True)
     nome = models.CharField(max_length=100)
-    created_at = models.DateTimeField(default=timezone.now())
-    updated_at = models.DateTimeField(default=timezone.now())
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(default=timezone.now)
 
     def save(self, *args, **kwargs):
         self.updated_at = timezone.now()
