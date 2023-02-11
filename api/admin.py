@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Cep
+from .models import Cep, CepsLojaCorr
 
 admin.site.register(Cep)
-# admin.site.register(CepsLojaCorr)
+admin.site.register(CepsLojaCorr)
 
