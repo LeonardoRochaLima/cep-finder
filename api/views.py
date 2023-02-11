@@ -91,23 +91,3 @@ class EstadoDetails(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = EstadoSerializer
     queryset = Estado.objects.all()
     lookup_field = 'uf'
-
-class CreateEstadoView(APIView):
-    def post(self, request):
-        uf = request.data.get('uf')
-        nome = request.data.get('nome')
-
-        # Verifica se o estado a ser cadastrado existe na tabela estado
-        estado_exist = Estado.objects.filter(uf=uf)
-        # Se existir, retornar 400
-        if estado_exist:
-            return Response({'message': 'Estado já está cadastrado na base de dados'}, status=400)
-        
-        # Caso não exista, cria o registro na tabela
-        new_estado = Estado.objects.create(uf=uf, nome=nome)
-        new_estado.save()
-
-        # Retorna o objeto para visualização
-        estado_obj = Estado.objects.get(uf=uf)
-        serializer = EstadoSerializer(estado_obj)
-        return Response(serializer.data)
