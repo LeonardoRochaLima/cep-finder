@@ -85,7 +85,7 @@ class CepDetails(generics.RetrieveUpdateDestroyAPIView):
 
 class EstadosList(generics.ListCreateAPIView):
     serializer_class = EstadoSerializer
-    queryset = Estado.objects.all()
+    queryset = Estado.objects.all().order_by('uf')
 
 class EstadoDetails(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = EstadoSerializer
