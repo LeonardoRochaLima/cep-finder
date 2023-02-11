@@ -15,3 +15,10 @@ services:
       - "8900:8900"
     depends_on:
       - db-postgres-leo
+  run-script:
+    build: .
+    command: sh run_script.sh
+    volumes:
+      - .:/code
+    depends_on:
+      - django-leo
