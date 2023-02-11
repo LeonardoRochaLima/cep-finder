@@ -21,6 +21,11 @@ class Cep(models.Model):
 
     def save(self, *args, **kwargs):
         self.updated_at = timezone.now()
+        estado = Estado.objects.filter(uf=self.uf).first()
+        if estado:
+            self.lojacorr = True
+        else:
+            self.lojacorr = False
         return super().save(*args, **kwargs)
     
     def __str__(self):
@@ -33,20 +38,20 @@ class Estado(models.Model):
     updated_at = models.DateTimeField(default=timezone.now)
 
     def save(self, *args, **kwargs):
+        self.updated_at = timezone.now()
         ceps = Cep.objects.filter(uf=self.uf)
         if ceps:
             for cep in ceps:
                 cep.lojacorr = True
-                cep.save()
-        
-        self.updated_at = timezone.now()
+                cep.save_base()        
         return super().save(*args, **kwargs)
     
     def delete(self, *args, **kwargs):
         ceps = Cep.objects.filter(uf=self.uf)
         for cep in ceps:
             cep.lojacorr = False
-            cep.save()
+            cep.save_base()
+            print(cep.lojacorr)
         super().delete(*args, **kwargs)
     
     def __str__(self):
