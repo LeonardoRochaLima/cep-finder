@@ -33,6 +33,12 @@ class Estado(models.Model):
     updated_at = models.DateTimeField(default=timezone.now)
 
     def save(self, *args, **kwargs):
+        ceps = Cep.objects.filter(uf=self.uf)
+        if ceps:
+            for cep in ceps:
+                cep.lojacorr = True
+                cep.save()
+        
         self.updated_at = timezone.now()
         return super().save(*args, **kwargs)
     
