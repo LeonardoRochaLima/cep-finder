@@ -13,6 +13,7 @@ class Cep(models.Model):
     gia = models.CharField(max_length=10, blank=True, null=True)
     ddd = models.CharField(max_length=3, blank=True, null=True)
     siafi = models.CharField(max_length=10, blank=True, null=True)
+    lojacorr = models.BooleanField(default=False)
 
     def __str__(self):
         return self.cep

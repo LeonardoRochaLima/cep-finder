@@ -20,7 +20,15 @@ class CreateCEPView(APIView):
 
             # Verifica se o CEP já está cadastrado
             cep_obj = Cep.objects.filter(cep=cep).first()
+            
+            # Verifica se o cep a ser cadastrado existe na tabela lojacorr
+            cep_obj_lojacorr = CepsLojaCorr.objects.filter(cep=cep).first()
+
             if cep_obj:
+                # Se o CEP for de uma das unidades da lojacorr, adicionamos a flag lojacorr=True
+                if cep_obj_lojacorr:
+                    cep_obj.lojacorr = True
+                
                 # Caso já exista, atualiza os dados
                 cep_obj.logradouro = data.get("logradouro")
                 cep_obj.complemento = data.get("complemento")
@@ -34,6 +42,22 @@ class CreateCEPView(APIView):
                 cep_obj.save()
             else:
                 # Caso não exista, cria um novo registro
+
+                # Se o CEP for de uma das unidades da lojacorr, adicionamos a flag lojacorr=True
+                if cep_obj_lojacorr: 
+                    Cep.objects.create(
+                        cep=cep,
+                        logradouro=data.get("logradouro"),
+                        complemento=data.get("complemento"),
+                        bairro=data.get("bairro"),
+                        localidade=data.get("localidade"),
+                        uf=data.get("uf"),
+                        ibge=data.get("ibge"),
+                        gia=data.get("gia"),
+                        ddd=data.get("ddd"),
+                        siafi=data.get("siafi"),
+                        lojacorr=True
+                    )
                 Cep.objects.create(
                     cep=cep,
                     logradouro=data.get("logradouro"),
