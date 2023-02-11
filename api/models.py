@@ -42,5 +42,12 @@ class Estado(models.Model):
         self.updated_at = timezone.now()
         return super().save(*args, **kwargs)
     
+    def delete(self, *args, **kwargs):
+        ceps = Cep.objects.filter(uf=self.uf)
+        for cep in ceps:
+            cep.lojacorr = False
+            cep.save()
+        super().delete(*args, **kwargs)
+    
     def __str__(self):
         return f"{self.uf}"
