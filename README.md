@@ -4,14 +4,14 @@
 
 O objetivo do projeto era criar uma stack utilizando **docker compose** que contemplasse um projeto em **Python/Django**, **Django Rest Framework** e banco de dados **Postgres**.
 
-- Consumindo os dados da [API VIACEP](https://viacep.com.br/) e armazenando as buscas em banco, criando um CRUD para buscar, exibir, listar e editar os dados adquiridos.
+- Consumir os dados da [API VIACEP](https://viacep.com.br/) e armazenando as buscas em banco, criando um CRUD para buscar, exibir, listar e editar os dados adquiridos.
 - Criar um codetable com todos os estados em que a Lojacorr atua e se a busca por CEP trouxer um estado que está no codetable, criar uma flag no banco para identificar.
 - Criar e documentar testes unitários utilizando [PYTEST](https://docs.pytest.org/en/7.2.x/).
 - Alimentar o README.md do projeto com informações das stacks.
 
 #### Como executar?
 
-Para rodar a stack você precisa ter:
+Para rodar a stack é necessário ter:
 
 1. [Python](https://www.python.org/) instalado na sua máquina.
 2. [Docker](https://docs.docker.com/) instalado na sua máquina.
@@ -27,11 +27,11 @@ db-postgres-cepfinder:
     POSTGRES_DB: <database>
 ...
 ```
-5. Alterar o parâmetro `ALLOWED_HOSTS` no arquivo `cepFinder/settings.py`. Estava usando um IP interno, talvez você queira rodar no seu `localhost`:
+5. Alterar o parâmetro `ALLOWED_HOSTS` no arquivo `cepFinder/settings.py`. Era usado um IP interno, talvez você queira rodar no seu `localhost`:
 ```
 ALLOWED_HOSTS = ['localhost']
 ```
-6. Rodar o comando para subir os serviços:
+6. Executar o comando para subir os serviços:
 ```
 docker compose up -d --build
 ```
@@ -52,9 +52,9 @@ docker compose up -d --build
 #### Funções específicas da aplicação:
 Abaixo segue algumas funções específicas que a aplicação possui, que representam as regras de negócio estabelecidas no objetivo deste projeto.
 - Na inserção ou atualização de qualquer registro na tabela **Cep**, sempre é verificado antes se não existe algum registro na tabela **Estado** com a mesma **UF**, para definir a flag `lojacorr=True`.
-- Sempre que um registro na tabela **Estado** é removido, também são atualizados os registros na tabela **Cep** que possuem a mesma **UF**, para atualizar a flag `lojacorr=False`.
+- Quando um registro na tabela **Estado** é removido, também são atualizados os registros na tabela **Cep** que possuem a mesma **UF**, para atualizar a flag `lojacorr=False`.
 - Caso a execução do `POST | /cep/create/{cep}` tenha retorno negativo, uma mensagem de erro é apresentada e nenhum registro é feito na tabela **Cep**.
-- Você pode fazer a execução de `POST | /cep/create/{cep}` e `GET | /cep/{cep}` com ou sem hífen no CEP, dessa forma, a execução dos endpoints tem sempre o mesmo resultado para os CEPs: `15025065` e `15025-065`.
+- Você pode executar o `POST | /cep/create/{cep}` e `GET | /cep/{cep}` com ou sem hífen no CEP, dessa forma, a execução dos endpoints tem sempre o mesmo resultado para os CEPs: `15025065` e `15025-065`.
 - Caso o usuário tente cadastrar um registro na tabela **Cep**, utilizando a função `POST | /cep/create/{cep}` mas o CEP já exista nos registros da tabela, esse registro é atualizado conforme a resposta da [API VIACEP](https://viacep.com.br/).
 
 #### Como interagir com a aplicação?
