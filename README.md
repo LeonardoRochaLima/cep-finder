@@ -50,7 +50,7 @@ docker compose up -d --build
 | POST | /cep/create/{cep} | Acessa a [API VIACEP](https://viacep.com.br/), caso o resultado seja positivo cadastra na tabela CEP.
 
 #### Funções específicas da aplicação:
-Abaixo seguem algumas funções específicas da aplicação, que representam as regras de negócio estabelecidas no objetivo deste projeto.
+Abaixo seguem algumas funções específicas da aplicação, que representam as [regras de negócio](#objetivo) estabelecidas no objetivo deste projeto.
 - Na inserção ou atualização de qualquer registro na tabela **Cep**, sempre é verificado antes se não existe algum registro na tabela **Estado** com a mesma **UF**, para definir a flag `lojacorr=True`.
 - Quando um registro na tabela **Estado** é removido, também são atualizados os registros na tabela **Cep** que possuem a mesma **UF**, para atualizar a flag `lojacorr=False`.
 - Caso a execução do `POST | /cep/create/{cep}` tenha retorno negativo, uma mensagem de erro é apresentada e nenhum registro é feito na tabela **Cep**.
@@ -174,7 +174,7 @@ pip install django-extensions
 
 ##### Executando testes(PYTEST):
 Foram criados testes unitários para as models, testando as [regras de negócio](#objetivo) que existem no contexto da aplicação.
-- Quando a stack sobe, o serviço `run-script-cepfinder`, executa o comando `pytest`, no terminal do container, onde é possível verificar se os testes unitários foram positivos ou negativos em relação as regras de negócio. Basta acessar os logs do `compose`, com o comando `docker compose logs` que você poderá visualizar os retornos da função de teste, conforme a imagem abaixo:
+- Quando a stack sobe, o serviço `run-script-cepfinder`, executa o comando `pytest`, no terminal do container, onde é possível verificar se os testes unitários foram positivos ou negativos em relação as [regras de negócio](#objetivo). Basta acessar os logs do `compose`, com o comando `docker compose logs` que você poderá visualizar os retornos da função de teste, conforme a imagem abaixo:
 ![pytest](images/pytest.PNG)
 - Mas você também pode executar os testes em seu próprio terminal, para poder visualizar a execução em tempo real:
   1. Acesse a pasta do projeto.
