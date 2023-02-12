@@ -49,6 +49,14 @@ docker compose up -d --build
 | GET | /cep/{cep} | Consulta de dados de um cep específico(View Sets Instance).
 | POST | /cep/create/{cep} | Acessa a [API VIACEP](https://viacep.com.br/), caso o resultado seja positivo cadastra na tabela CEP.
 
+#### Funções específicas da aplicação:
+Abaixo segue algumas funções específicas que a aplicação possui, que representam as regras de negócio estabelecidas no objetivo deste projeto.
+- Na inserção ou atualização de qualquer registro na tabela **Cep**, sempre é verificado antes se não existe algum registro na tabela **Estado** com a mesma **UF**, para definir a flag `lojacorr=True`.
+- Sempre que um registro na tabela **Estado** é removido, também são atualizados os registros na tabela **Cep** que possuem a mesma **UF**, para atualizar a flag `lojacorr=False`.
+- Caso a execução do `POST | /cep/create/{cep}` tenha retorno negativo, uma mensagem de erro é apresentada e nenhum registro é feito na tabela **Cep**.
+- Você pode fazer a execução de `POST | /cep/create/{cep}` e `GET | /cep/{cep}` com ou sem hífen no CEP, dessa forma, a execução dos endpoints tem sempre o mesmo resultado para os CEPs: `15025065` e `15025-065`.
+- Caso o usuário tente cadastrar um registro na tabela **Cep**, utilizando a função `POST | /cep/create/{cep}` mas o CEP já exista nos registros da tabela, esse registro é atualizado conforme a resposta da [API VIACEP](https://viacep.com.br/).
+
 #### Como interagir com a aplicação?
 
 1. Após a execução da stack no passo anterior, você poderá acessar a URL do projeto em execução no seu browser preferido e irá visualizar nossas rotas **default** da aplicação:
@@ -174,5 +182,3 @@ Foram criados testes unitários para as models, testando as regras de negócio q
   3. Ative a sua `venv` com o comando `source venv/bin/activate`
   4. Instale as dependências do projeto no seu ambiente virtual: `pip install -r requirements.txt`
   5. Execute o comando `pytest` que roda os testes unitários e você poderá ver no seu terminal a execução dos testes criados em `api/tests/test_models.py`
-
-#### Regras aplicadas:
