@@ -4,6 +4,7 @@ from .models import Cep, Estado
 from .serializers import CepSerializer, EstadoSerializer
 import requests
 from rest_framework.views import APIView
+from django.shortcuts import get_object_or_404
 
 class CepList(generics.ListCreateAPIView):
     serializer_class = CepSerializer
@@ -81,6 +82,11 @@ class CepDetails(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CepSerializer
     queryset = Cep.objects.all()
     lookup_field = 'cep'
+
+    def get_object(self):
+        queryset = self.get_queryset()
+        cep = self.kwargs[self.lookup_field].replace('-', '')
+        return get_object_or_404(queryset, cep=cep)
 
 
 class EstadosList(generics.ListCreateAPIView):
