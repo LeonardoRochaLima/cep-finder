@@ -61,7 +61,7 @@ Abaixo seguem algumas funções específicas da aplicação, que representam as 
 
 #### Como interagir com a aplicação?
 
-1. Após a execução da stack no passo anterior, você poderá acessar a URL do projeto em execução no seu browser preferido e irá visualizar nossas rotas **default** da aplicação:
+1. Após a execução da stack, você poderá acessar a URL do projeto em execução no seu browser preferido e irá visualizar nossas rotas **default** da aplicação:
 
 ![apiroot](images/apiroot2.PNG)
 
@@ -166,7 +166,7 @@ services:
 
 ##### Populando a tabela Estado:
 
-Para popular os dados da tabela **Estado** sempre que a stack sobe, eu configurei um script utilizando a biblioteca `django-extensions`. O serviço `run-script-cepfinder` é responsável por rodar um comando via **_bash_** que chama a execução do script, sempre após todos os outros serviços estarem no ar.
+Para popular os dados da tabela **Estado** sempre que a stack sobe, eu configurei um script utilizando a biblioteca `django-extensions`. O serviço `run-script` é responsável por rodar um comando via **_bash_** que chama a execução do script, sempre após todos os outros serviços estarem no ar.
 
 1. Instalei a biblioteca `django-extensions` do **Python**:
 
@@ -179,7 +179,7 @@ pip install django-extensions
 
 ##### Executando testes(PYTEST):
 Foram criados testes unitários para as models, testando as [regras de negócio](#objetivo) que existem no contexto da aplicação.
-- Quando a stack sobe, o serviço `run-script-cepfinder`, executa o comando `pytest`, no terminal do container, onde é possível verificar se os testes unitários foram positivos ou negativos em relação as [regras de negócio](#objetivo). Basta acessar os logs do `compose`, com o comando `docker compose logs` que você poderá visualizar os retornos da função de teste, conforme a imagem abaixo:
+- Quando a stack sobe, o serviço `run-script`, executa o comando `pytest`, no terminal do container, onde é possível verificar se os testes unitários foram positivos ou negativos em relação as [regras de negócio](#objetivo). Basta acessar os logs do `compose`, com o comando `docker compose logs` que você poderá visualizar os retornos da função de teste, conforme a imagem abaixo:
 ![pytest](images/pytest.PNG)
 - Mas você também pode executar os testes em seu próprio terminal, para poder visualizar a execução em tempo real:
   1. Acesse a pasta do projeto.
