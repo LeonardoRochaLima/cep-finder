@@ -120,7 +120,7 @@ Após isso já era possível rodar a base do projeto. Então parti para criaçã
 
 - **db-postegres**. Serviço responsável pela execução da base de dados, possibilitando o registro dos outros serviços.
 - **django**. Serviço em **Python/Django**, responsável pela execução das funções da aplicação.
-- **run-script**. Serviço responsável por chamar uma função via **_bash_** que popula a tabela **Estado**, com todos os estados em que a Lojacorr atua, com base nas [Unidades pelo Brasil](https://redelojacorr.com.br/unidades/).
+- **run-script**. Serviço responsável por chamar uma função via **_bash_** que popula a tabela **Estado**, com todos os estados em que a Lojacorr atua, com base nas [Unidades pelo Brasil](https://redelojacorr.com.br/unidades/). Também executa os testes a aplicação [PYTEST](https://docs.pytest.org/en/7.2.x/).
 
 Os serviços são co-dependentes, por isso adicionei a opção **depends_on** no `docker-compose.yml`, para que os serviços subam na ordem correta.
 
@@ -163,5 +163,16 @@ pip install django-extensions
 
 2. Configurei um script para popular a tabela **Estado**. Disponível para visualização em: `api/scripts/populate_estados.py`.
 3. Criei o arquivo **_bash_** que chama a execução do script. Disponível para visualização em: `./run_script.sh`.
+
+##### Executando testes(PYTEST):
+Foram criados testes unitários para as models, testando as regras de negócio que existem no contexto da aplicação.
+- Quando a stack sobe, o serviço `run-script-cepfinder`, executa o comando `pytest`, no terminal do container, onde é possível verificar se os testes unitários foram positivos ou negativos em relação as regras de negócio. Basta acessar os logs do `compose`, com o comando `docker compose logs` que você poderá visualizar os retornos da função de teste, conforme a imagem abaixo:
+![pytest](images/pytest.PNG)
+- Mas você também pode executar os testes em seu próprio terminal, para poder visualizar a execução em tempo real:
+  1. Acesse a pasta do projeto.
+  2. Crie uma venv local com o comando `python3 -m venv venv`
+  3. Ative a sua venv com o comando `source venv/bin/activate`
+  4. Instale as dependências do projeto no seu ambiente virtual: `pip install -r requirements.txt`
+  5. Execute o comando `pytest` que roda os testes unitários e você poderá ver no seu terminal a execução dos testes criados em `api/tests/test_models.py`
 
 #### Regras aplicadas:
