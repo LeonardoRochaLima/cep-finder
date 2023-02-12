@@ -13,8 +13,8 @@ O objetivo do projeto era criar uma stack utilizando **docker compose** que cont
 
 Para rodar a stack é necessário ter:
 
-1. [Python](https://www.python.org/) instalado na sua máquina.
-2. [Docker](https://docs.docker.com/) instalado na sua máquina.
+1. [Python](https://www.python.org/) versão **3.9.2** ou posterior.
+2. [Docker](https://docs.docker.com/) versão **20.10.22** ou posterior.
 3. Banco de dados [Postgres](https://www.postgresql.org/docs/).
 4. Precisa criar uma base de dados no seu banco [Postgres](https://www.postgresql.org/docs/) e inserir as informações no arquivo `docker-compose.yml`:
 ```
@@ -129,7 +129,7 @@ Após isso já era possível rodar a base do projeto. Então parti para criaçã
 
 - **db-postegres**. Serviço responsável pela execução da base de dados, possibilitando o registro dos outros serviços.
 - **django**. Serviço em **Python/Django**, responsável pela execução das funções da aplicação.
-- **run-script**. Serviço responsável por chamar uma função via **_bash_** que popula a tabela **Estado**, com todos os estados em que a Lojacorr atua, com base nas [Unidades pelo Brasil](https://redelojacorr.com.br/unidades/). Também executa os testes a aplicação [PYTEST](https://docs.pytest.org/en/7.2.x/).
+- **run-script**. Serviço responsável por chamar uma função via **_bash_** que faz a migração da database, popula a tabela **Estado**, com todos os estados em que a Lojacorr atua, com base nas [Unidades pelo Brasil](https://redelojacorr.com.br/unidades/). Também executa os testes a aplicação [PYTEST](https://docs.pytest.org/en/7.2.x/).
 
 Os serviços são co-dependentes, por isso adicionei a opção **depends_on** no `docker-compose.yml`, para que os serviços subam na ordem correta.
 
