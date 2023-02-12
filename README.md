@@ -36,6 +36,7 @@ ALLOWED_HOSTS = ['localhost']
 ```
 docker compose up -d --build
 ```
+7. A aplicação está configurada para rodar na porta `:8900`, sinta-se a vontade para alterar essa configuração no arquivo `docker-compose.yml`.
 #### API endpoints:
 
 ##### Estado:
