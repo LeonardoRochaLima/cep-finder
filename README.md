@@ -19,7 +19,8 @@ Para rodar a stack é necessário ter:
 4. Precisa criar uma base de dados no seu banco [Postgres](https://www.postgresql.org/docs/) e inserir as informações no arquivo `docker-compose.yml`:
 ```
 ...
-db-postgres-cepfinder:
+db-postgres:
+    container_name: db-postgres
     image: postgres
     environment:
     POSTGRES_USER: <usuario_postegrs>
@@ -135,13 +136,15 @@ Os serviços são co-dependentes, por isso adicionei a opção **depends_on** no
 ```docker-compose.yml
 version: '3'
 services:
-  db-postgres-cepfinder:
+  db-postgres:
+    container_name: db-postgres
     image: postgres
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
-  django-cepfinder:
+  django:
+    container_name: django
     build: .
     command: python manage.py runserver 0.0.0.0:8900
     volumes:
@@ -149,14 +152,15 @@ services:
     ports:
       - "8900:8900"
     depends_on:
-      - db-postgres-cepfinder
-  run-script-cepfinder:
+      - db-postgres
+  run-script:
+    container_name: run-script
     build: .
     command: sh run_script.sh
     volumes:
       - .:/code
     depends_on:
-      - django-cepfinder
+      - django
 ```
 
 ##### Populando a tabela Estado:
