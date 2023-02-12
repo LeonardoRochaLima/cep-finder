@@ -173,7 +173,7 @@ pip install django-extensions
 3. Criei o arquivo **_bash_** que chama a execução do script. Disponível para visualização em: `./run_script.sh`.
 
 ##### Executando testes(PYTEST):
-Foram criados testes unitários para as models, testando as regras de negócio que existem no contexto da aplicação.
+Foram criados testes unitários para as models, testando as [regras de negócio](#objetivo) que existem no contexto da aplicação.
 - Quando a stack sobe, o serviço `run-script-cepfinder`, executa o comando `pytest`, no terminal do container, onde é possível verificar se os testes unitários foram positivos ou negativos em relação as regras de negócio. Basta acessar os logs do `compose`, com o comando `docker compose logs` que você poderá visualizar os retornos da função de teste, conforme a imagem abaixo:
 ![pytest](images/pytest.PNG)
 - Mas você também pode executar os testes em seu próprio terminal, para poder visualizar a execução em tempo real:
