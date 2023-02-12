@@ -9,5 +9,5 @@ class CepViewSets(viewsets.ModelViewSet):
 
 class EstadoViewSets(viewsets.ModelViewSet):
     serializer_class = EstadoSerializer
-    queryset = Estado.objects.all()
+    queryset = Estado.objects.all().order_by('uf')
     lookup_field = 'uf'
