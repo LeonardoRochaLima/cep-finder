@@ -11,12 +11,12 @@ O objetivo do projeto era criar uma stack utilizando **docker compose** que cont
 
 #### Como executar?
 
-Para rodar os projetos você precisa ter:
+Para rodar a stack você precisa ter:
 
 1. [Python](https://www.python.org/) instalado na sua máquina.
 2. [Docker](https://docs.docker.com/) instalado na sua máquina.
 3. Banco de dados [Postgres](https://www.postgresql.org/docs/).
-4. Precisa criar uma base de dados no seu banco [Postgres](https://www.postgresql.org/docs/) e inserir as informações no arquivo **docker-compose.yml**:
+4. Precisa criar uma base de dados no seu banco [Postgres](https://www.postgresql.org/docs/) e inserir as informações no arquivo `docker-compose.yml`:
 ```
 ...
 db-postgres-cepfinder:
@@ -122,7 +122,7 @@ Após isso já era possível rodar a base do projeto. Então parti para criaçã
 - **django**. Serviço em **Python/Django**, responsável pela execução das funções da aplicação.
 - **run-script**. Serviço responsável por chamar uma função via **_bash_** que popula a tabela **Estado**, com todos os estados em que a Lojacorr atua, com base nas [Unidades pelo Brasil](https://redelojacorr.com.br/unidades/).
 
-Os serviços são co-dependentes, por isso adicionei a opção **depends_on** no **docker-compose.yml**, para que os serviços subam na ordem correta.
+Os serviços são co-dependentes, por isso adicionei a opção **depends_on** no `docker-compose.yml`, para que os serviços subam na ordem correta.
 
 ```docker-compose.yml
 version: '3'
