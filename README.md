@@ -39,8 +39,7 @@ docker compose up -d --build
 #### Como interagir com a aplicação?
 
 1. Após a execução da stack no passo anterior, você poderá acessar a URL do projeto em execução no seu browser preferido e irá visualizar nossas rotas **default** da aplicação:
-
-![apiroot](images/apiroot.PNG)
+<img src="images/apiroot.PNG" alt="apiroot">
 
 2. Podemos acessar qualquer uma das URLs para as nossas **viewsets** de cada uma das **models** do projeto. Por exemplo, acessando `/estado` temos a listagem de todas os registros da tabela **Estado**:
 ![estado](images/estado.PNG)
