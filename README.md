@@ -34,6 +34,9 @@ Para rodar os projetos você precisa ter:
 
 #### Como o projeto foi estruturado?
 ##### Banco de dados Postgres
+<p align="center">
+    <img src="images/postgres.png">
+</p>
 Primeiro eu criei uma base de dados bem simples para que o projeto Django pudesse utilizar. Fazia um tempo que não trabalhava com Postgres, então tive que reaprender alguns conceitos. Instalei no meu Debian e criei uma database.
 
 ##### Django Rest Framework
