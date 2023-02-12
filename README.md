@@ -17,47 +17,53 @@ Para rodar os projetos você precisa ter:
 2. [Docker](https://docs.docker.com/) instalado na sua máquina.
 3. Banco de dados [Postgres](https://www.postgresql.org/docs/).
 4. Precisa criar uma base de dados no seu banco [Postgres](https://www.postgresql.org/docs/) e inserir as informações no arquivo **docker-compose.yml**:
-   ```
-   ...
-   db-postgres-cepfinder:
-       image: postgres
-       environment:
-       POSTGRES_USER: <usuario_postegrs>
-       POSTGRES_PASSWORD: <senha>
-       POSTGRES_DB: <database>
-   ...
-   ```
+```
+...
+db-postgres-cepfinder:
+    image: postgres
+    environment:
+    POSTGRES_USER: <usuario_postegrs>
+    POSTGRES_PASSWORD: <senha>
+    POSTGRES_DB: <database>
+...
+```
 5. Alterar o parâmetro `ALLOWED_HOSTS` no arquivo `cepFinder/settings.py`. Estava usando um IP interno, talvez você queira rodar no seu `localhost`:
-   ```
-   ALLOWED_HOSTS = ['localhost']
-   ```
+```
+ALLOWED_HOSTS = ['localhost']
+```
 6. Rodar o comando para subir os serviços:
-   ```
-   docker compose up -d --build
-   ```
+```
+docker compose up -d --build
+```
 
 #### Como interagir com a aplicação?
-1. Após a execução da stack no passo anterior, você poderá acessar a URL do projeto em execução no seu browser preferido e irá visualizar nossas rotas ***default*** da aplicação:
-  <img src="images/apiroot.PNG">
+
+1. Após a execução da stack no passo anterior, você poderá acessar a URL do projeto em execução no seu browser preferido e irá visualizar nossas rotas **_default_** da aplicação:
+<img src="images/apiroot.PNG">
+
 2. Podemos acessar qualquer uma das URLs para as nossas **viewsets** de cada uma das **models** do projeto. Por exemplo, acessando `/estado` temos a listagem de todas os registros da tabela **Estado**:
-  <img src="images/estado.PNG">
+   <img src="images/estado.PNG">
 3. Nas páginas **viewsets** também temos os campos disponíveis para a criação de registros nas tabelas. Exemplo em:`/estado`:
-  <img src="images/create.PNG">
+<img src="images/create.PNG">
 Basta preencher os dados do formulário corretamente e enviar pelo botão **Post**, para inserir um registro na tabela.
 4. Para acessar a visualização de um registro específico, basta inserirmos na URL da página, como parâmetro, desta forma: `/<viewset>/<primary_key>`. Exemplo: `estado/PR`:
-  <img src="images/viewsetinstance.PNG">
+<img src="images/viewsetinstance.PNG">
+
 5. Acessando uma **viewset instance**, temos também acesso às funções de **UPDATE** e **DELETE** daquele registro específico. No caso do **UPDATE** basta atualizar os campos que estão livres para edição no final da página e clicar em **PUT**, seu registro será atualizado. Exemplo: `estado/PR`:
-  <img src="images/viewsetput.PNG">
+<img src="images/viewsetput.PNG">
+
 6. Para realizar a exclusão de um registro, podemos utilizar a **viewset instance** do registro que queremos remover da tabela. Clicando em **DELETE** será apresentado uma tela de confirmação para validar a execução do comando. Exemplo: `estado/PR`:
-  <img src="images/viewsetdelete.PNG">
-  <img src="images/viewsetdeleteconfirm.PNG">
+<img src="images/viewsetdelete.PNG">
+<img src="images/viewsetdeleteconfirm.PNG">
+
 7. Temos uma pequena diferença na maneira como realizamos o registro de novos itens na nossa tabela **Cep**. Como ela precisa fazer uma requisição na API VIACEP e validar se o CEP existe na sua base antes de inserir o registro, precisei modificar a forma da função create. A função aceita registros por sua **viewset** também, mas para de fato puxar os dados da [API VIACEP](https://viacep.com.br/) e executar a função, você precisa colocar os dados na URL do seu navegador. Desta forma: `/cep/create/<cep_para_inserção>`. Vamos aplicar o exemplo: `/cep/create/15025-065`:
-  <img src="images/cepcreate.PNG">
+<img src="images/cepcreate.PNG">
 No exemplo, como o CEP cadastrado pertence a uma UF em que a Lojacorr atua, a flag `lojacorr` é apresentada como `true` no registro.
 
 #### Como o projeto foi estruturado?
 
 ##### Banco de dados Postgres
+
 Primeiro eu criei uma base de dados bem simples para que o projeto Django pudesse utilizar. Fazia um tempo que não trabalhava com Postgres, então tive que reaprender alguns conceitos. Instalei no meu Debian e criei uma database.
 
 ##### Django Rest Framework
