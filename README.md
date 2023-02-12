@@ -53,27 +53,27 @@ docker compose up -d --build
 
 1. Após a execução da stack no passo anterior, você poderá acessar a URL do projeto em execução no seu browser preferido e irá visualizar nossas rotas **default** da aplicação:
 
-![apiroot](images/apiroot.PNG)
+![apiroot](images/apiroot2.PNG)
 
 2. Podemos acessar qualquer uma das URLs para as nossas **viewsets** de cada uma das **models** do projeto. Por exemplo, acessando `/estado` temos a listagem de todas os registros da tabela **Estado**:
-![estado](images/estado.PNG)
+![estado](images/estado2.PNG)
 
 3. Nas páginas **viewsets** também temos os campos disponíveis para a criação de registros nas tabelas. Exemplo em:`/estado`:
-![create](images/create.PNG)
+![create](images/create2.PNG)
 Basta preencher os dados do formulário corretamente e enviar pelo botão **Post**, para inserir um registro na tabela.
 
 4. Para acessar a visualização de um registro específico, basta inserirmos na URL da página, como parâmetro, desta forma: `/<viewset>/<primary_key>`. Exemplo: `estado/PR`:
-![viewsetinstance](images/viewsetinstance.PNG)
+![viewsetinstance](images/viewsetinstance2.PNG)
 
 5. Acessando uma **viewset instance**, temos também acesso às funções de **UPDATE** e **DELETE** daquele registro específico. No caso do **UPDATE** basta atualizar os campos que estão livres para edição no final da página e clicar em **PUT**, seu registro será atualizado. Exemplo: `estado/PR`:
-![viewsetput](images/viewsetput.PNG)
+![viewsetput](images/viewsetput2.PNG)
 
 6. Para realizar a exclusão de um registro, podemos utilizar a **viewset instance** do registro que queremos remover da tabela. Clicando em **DELETE** será apresentado uma tela de confirmação para validar a execução do comando. Exemplo: `estado/PR`: 
-![viewsetdelete](images/viewsetdelete.PNG)
-![viewsetdeleteconfirm](images/viewsetdeleteconfirm.PNG)
+![viewsetdelete](images/viewsetdelete2.PNG)
+![viewsetdeleteconfirm](images/viewsetdeleteconfirm2.PNG)
 
 7. Temos uma pequena diferença na maneira como realizamos o registro de novos itens na nossa tabela **Cep**. Como ela precisa fazer uma requisição na [API VIACEP](https://viacep.com.br/) e validar se o CEP existe na sua base antes de inserir o registro, precisei modificar a forma da função create. A função aceita registros por sua **viewset** também, mas para de fato puxar os dados da [API VIACEP](https://viacep.com.br/) e executar a função, você precisa colocar os dados na URL do seu navegador. Desta forma: `/cep/create/<cep_para_inserção>`. Vamos aplicar o exemplo: `/cep/create/15025-065`. No exemplo, como o CEP cadastrado pertence a uma UF em que a Lojacorr atua, a flag `lojacorr` é apresentada como `true` no registro: 
-<img src="images/cepcreate.PNG" style="width: 70%">
+<img src="images/cepcreate2.PNG" style="width: 70%">
 
 #### Como o projeto foi estruturado?
 
