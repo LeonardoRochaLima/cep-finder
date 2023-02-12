@@ -35,6 +35,18 @@ ALLOWED_HOSTS = ['localhost']
 ```
 docker compose up -d --build
 ```
+#### API endpoints:
+##### Estado:
+| Método   |      Endpoint      |  Descrição |
+|----------|:-------------:|------:|
+| GET | /estado | Acesso à todos os Estados cadastrados(Estados List).
+| GET | /estado/{uf} | Consulta de dados de um estado específico(View Sets Instance).
+##### Cep:
+| Método   |      Endpoint      |  Descrição |
+|----------|:-------------:|------:|
+| GET | /cep | Acesso à todos os Ceps cadastrados(Ceps List).
+| GET | /cep/{cep} | Consulta de dados de um cep específico(View Sets Instance).
+| POST | /cep/create/{cep} | Acessa a [API VIACEP](https://viacep.com.br/), caso o resultado seja positivo cadastra na tabela CEP.
 
 #### Como interagir com a aplicação?
 
@@ -59,7 +71,7 @@ Basta preencher os dados do formulário corretamente e enviar pelo botão **Post
 ![viewsetdelete](images/viewsetdelete.PNG)
 ![viewsetdeleteconfirm](images/viewsetdeleteconfirm.PNG)
 
-7. Temos uma pequena diferença na maneira como realizamos o registro de novos itens na nossa tabela **Cep**. Como ela precisa fazer uma requisição na API VIACEP e validar se o CEP existe na sua base antes de inserir o registro, precisei modificar a forma da função create. A função aceita registros por sua **viewset** também, mas para de fato puxar os dados da [API VIACEP](https://viacep.com.br/) e executar a função, você precisa colocar os dados na URL do seu navegador. Desta forma: `/cep/create/<cep_para_inserção>`. Vamos aplicar o exemplo: `/cep/create/15025-065`. No exemplo, como o CEP cadastrado pertence a uma UF em que a Lojacorr atua, a flag `lojacorr` é apresentada como `true` no registro: 
+7. Temos uma pequena diferença na maneira como realizamos o registro de novos itens na nossa tabela **Cep**. Como ela precisa fazer uma requisição na [API VIACEP](https://viacep.com.br/) e validar se o CEP existe na sua base antes de inserir o registro, precisei modificar a forma da função create. A função aceita registros por sua **viewset** também, mas para de fato puxar os dados da [API VIACEP](https://viacep.com.br/) e executar a função, você precisa colocar os dados na URL do seu navegador. Desta forma: `/cep/create/<cep_para_inserção>`. Vamos aplicar o exemplo: `/cep/create/15025-065`. No exemplo, como o CEP cadastrado pertence a uma UF em que a Lojacorr atua, a flag `lojacorr` é apresentada como `true` no registro: 
 <img src="images/cepcreate.PNG" style="width: 70%">
 
 #### Como o projeto foi estruturado?
