@@ -42,10 +42,11 @@ docker compose up -d --build
 <img src="images/apiroot.PNG">
 
 2. Podemos acessar qualquer uma das URLs para as nossas **viewsets** de cada uma das **models** do projeto. Por exemplo, acessando `/estado` temos a listagem de todas os registros da tabela **Estado**:
-   <img src="images/estado.PNG">
+<img src="images/estado.PNG">
 3. Nas páginas **viewsets** também temos os campos disponíveis para a criação de registros nas tabelas. Exemplo em:`/estado`:
 <img src="images/create.PNG">
 Basta preencher os dados do formulário corretamente e enviar pelo botão **Post**, para inserir um registro na tabela.
+
 4. Para acessar a visualização de um registro específico, basta inserirmos na URL da página, como parâmetro, desta forma: `/<viewset>/<primary_key>`. Exemplo: `estado/PR`:
 <img src="images/viewsetinstance.PNG">
 
