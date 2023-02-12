@@ -36,11 +36,7 @@ ALLOWED_HOSTS = ['localhost']
 docker compose up -d --build
 ```
 #### API endpoints:
-<style>
-table {
-  margin: 0 auto;
-}
-</style>
+
 ##### Estado:
 | Método   |      Endpoint      |  Descrição |
 |----------|:-------------:|------:|
