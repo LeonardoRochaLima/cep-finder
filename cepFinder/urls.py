@@ -21,7 +21,7 @@ from api import viewsets as apiviewsets
 route = routers.DefaultRouter()
 
 route.register(r'cep', apiviewsets.CepViewSets, basename="Cep")
-route.register(r'estado', apiviewsets.CepViewSets, basename="Estado")
+route.register(r'estado', apiviewsets.EstadoViewSets, basename="Estado")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
