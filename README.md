@@ -56,11 +56,11 @@ Logo em seguida criei uma API para gerenciar minhas **models** e funções que s
 ```
 django-admin startapp api
 ```
-
-Após isso já era possível rodar a base do projeto. Então parti para criação do **docker compose** que criaria os três serviços necessários:
-- **db-postegres**. Serviço responsável pela execução da base de dados, disponibilizando para os outros serviços para registro.
+##### Docker Compose
+Após isso já era possível rodar a base do projeto. Então parti para criação do **docker compose**, que criaria os três serviços necessários para nossa aplicação:
+- **db-postegres**. Serviço responsável pela execução da base de dados, possibilitando o registro dos outros serviços.
 - **django**. Serviço em **Python/Django**, responsável pela execução das funções da aplicação.
-- **run-script**. Serviço responsável por chamar uma função via ***bash*** que popula a tabela **Estado**, com todos os estados em que a Lojacorr atua.
+- **run-script**. Serviço responsável por chamar uma função via ***bash*** que popula a tabela **Estado**, com todos os estados em que a Lojacorr atua, com base nas [Unidades pelo Brasil](https://redelojacorr.com.br/unidades/).
 
 Os serviços são co-dependentes, por isso adicionei a opção **depends_on** no **docker-compose.yml**, para que os serviços subam na ordem correta.
 ```docker-compose.yml
@@ -89,4 +89,15 @@ services:
     depends_on:
       - django-cepfinder
 ```
+
+##### Populando a tabela Estado:
+Para popular os dados da tabela **Estado** sempre que a stack sobe, eu configurei um script utilizando a biblioteca `django-extensions`. O serviço `run-script-cepfinder` é responsável por rodar um comando via ***bash*** que chama a execução do script, sempre após todos os outros serviços estarem no ar.
+
+1. Instalei a biblioteca `django-extensions` do **Python**:
+```
+pip install django-extensions
+```
+2. Configurei um script para popular a tabela **Estado**. Disponível para visualização em: `api/scripts/populate_estados.py`.
+3. Criei o arquivo ***bash*** que chama a execução do script. Disponível para visualização em: `./run_script.sh`.
+
 
