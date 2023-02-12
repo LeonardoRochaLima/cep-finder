@@ -29,6 +29,8 @@ Para rodar os projetos você precisa ter:
     ```
     docker compose up -d --build
     ```
+#### Como interagir com a aplicação?
+
 
 #### Como o projeto foi estruturado?
 ##### Banco de dados Postgres
@@ -100,4 +102,4 @@ pip install django-extensions
 2. Configurei um script para popular a tabela **Estado**. Disponível para visualização em: `api/scripts/populate_estados.py`.
 3. Criei o arquivo ***bash*** que chama a execução do script. Disponível para visualização em: `./run_script.sh`.
 
-
+#### Regras aplicadas:
