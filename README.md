@@ -83,13 +83,13 @@ Primeiro eu criei uma base de dados bem simples para que o projeto Django pudess
 
 ##### Django Rest Framework
 
-No meu repositório do projeto criei uma **venv** do python para controlar as dependências específicas do meu projeto:
+No meu repositório do projeto criei uma `venv` do python para controlar as dependências específicas do meu projeto:
 
 ```
 python3 -m venv venv
 ```
 
-Ativei a **venv** através do comando:
+Ativei a `venv` através do comando:
 
 ```
 source venv/bin/activate
@@ -170,8 +170,8 @@ Foram criados testes unitários para as models, testando as regras de negócio q
 ![pytest](images/pytest.PNG)
 - Mas você também pode executar os testes em seu próprio terminal, para poder visualizar a execução em tempo real:
   1. Acesse a pasta do projeto.
-  2. Crie uma venv local com o comando `python3 -m venv venv`
-  3. Ative a sua venv com o comando `source venv/bin/activate`
+  2. Crie uma `venv` local com o comando `python3 -m venv venv`
+  3. Ative a sua `venv` com o comando `source venv/bin/activate`
   4. Instale as dependências do projeto no seu ambiente virtual: `pip install -r requirements.txt`
   5. Execute o comando `pytest` que roda os testes unitários e você poderá ver no seu terminal a execução dos testes criados em `api/tests/test_models.py`
 
