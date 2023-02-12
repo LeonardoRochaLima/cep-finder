@@ -33,7 +33,12 @@ Logo em seguida criei uma API para gerenciar minhas **models** e funções que s
 django-admin startapp api
 ```
 
-Após isso já era possível rodar o projeto base do Django Resk Framework. Então parti para criação do **docker compose** que executaria minha base de dados e meu projeto Django.
+Após isso já era possível rodar o projeto base do Django Resk Framework. Então parti para criação do **docker compose** que criaria os três serviços necessários:
+- **db-postegres**. Serviço responsável pela execução da base de dados, disponibilizando para os outros serviços para registro.
+- **django**. Serviço em **Python/Django**, responsável pela execução das funções da aplicação.
+- **run-script**. Serviço responsável por chamar uma função via ***bash*** que popula a tabela **Estado**, com todos os estados em que a Lojacorr atua.
+
+Os serviços são co-dependentes, por isso adicionei a opção **depends_on** no **docker-compose.yml**, para que os serviços subam na ordem correta.
 ```docker-compose.yml
 version: '3'
 services:
