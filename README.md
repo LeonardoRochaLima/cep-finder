@@ -42,13 +42,13 @@ Os serviços são co-dependentes, por isso adicionei a opção **depends_on** no
 ```docker-compose.yml
 version: '3'
 services:
-  db-postgres-leo:
+  db-postgres-cepfinder:
     image: postgres
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
-  django-leo:
+  django-cepfinder:
     build: .
     command: python manage.py runserver 0.0.0.0:8900
     volumes:
@@ -56,12 +56,12 @@ services:
     ports:
       - "8900:8900"
     depends_on:
-      - db-postgres-leo
-  run-script:
+      - db-postgres-cepfinder
+  run-script-cepfinder:
     build: .
     command: sh run_script.sh
     volumes:
       - .:/code
     depends_on:
-      - django-leo
+      - django-cepfinder
 ```
