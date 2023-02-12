@@ -51,7 +51,6 @@ class Estado(models.Model):
         for cep in ceps:
             cep.lojacorr = False
             cep.save_base()
-            print(cep.lojacorr)
         super().delete(*args, **kwargs)
     
     def __str__(self):
